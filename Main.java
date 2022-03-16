@@ -1,10 +1,14 @@
+import java.util.Scanner;
+
 //controller, makes possible the interaction between view and model
 public class Main {
+    static Scanner scanner =  new Scanner(System.in);
+
 
 
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
+
         //The user profile data, menu data, and all other system data
         // //is persisted across running of the system
 
@@ -12,7 +16,12 @@ public class Main {
 
         //start GUI   Javafx stage start
 
+        Manager manager = new Manager("ben","cole", "manager","1234");
+
         Database db =  new Database();
+
+        logIn(db,manager);
+
 
         //When opening the system the user should be presented with a choice of existing profiles
 
@@ -22,7 +31,6 @@ public class Main {
         //different views based on which staff, customer different view
         System.out.println("Log in(admin/customer) or Register(customer only)"); //only 1 admin/manager
 
-        db.addCust();
 
         db.viewAllCustomers();
 
@@ -57,6 +65,98 @@ public class Main {
 
 
         //quit program, save database to text files first*/
+
+    }
+
+    public static void logIn(Database db,Manager manager)
+    {
+
+
+        int choice = -1;
+
+        while (choice != 0)
+        {
+            System.out.println("1. Log in(admin/customer) or 2.Register(customer only)   0 exit /");
+
+            choice = scanner.nextInt();
+
+            switch (choice)
+            {
+                case 1 :
+                    // ask whether you are admin or customer
+                    customerOrAdmin(db,manager);
+                    break;
+                case 2:
+                    db.addCust();
+                    break;
+                default:
+                    System.out.println("Error");
+                    break;
+            }
+
+        }
+
+
+
+
+    }
+
+    public static void customerOrAdmin(Database db,Manager manager)
+    {
+
+        int choice = -1;
+
+        while (choice != 0)
+        {
+            System.out.println("1. admin 2.customer");
+
+            choice = scanner.nextInt();
+
+            switch (choice)
+            {
+                case 1 :
+                    System.out.printf("Enter name ");
+                    String nameManager = scanner.next();
+                    //scanner.nextLine();
+                    System.out.printf("Enter password ");
+                    String password = scanner.next();
+
+                    if(manager.getfName().equals(nameManager) && manager.getPassword().equals(password))
+                    {
+                        System.out.println("Logged in as admin ");
+                        //Call admin view
+                    }
+
+                    break;
+                case 2:
+                    System.out.printf("%nEnter name ");
+                    String nameCust = scanner.next();
+                    //scanner.nextLine();
+                    System.out.printf("%nEnter password ");
+                    String passwordCust = scanner.next();
+
+                    if(db.validPassword(nameCust,passwordCust))
+                    {
+                        System.out.println("Logged in as customer " + nameCust);
+
+                    }
+                    else
+                    {
+                        System.out.println("Enter again");
+                    }
+
+
+                    break;
+
+                default:
+                    System.out.println("Error");
+                    break;
+
+
+            }
+
+        }
+
 
     }
 
