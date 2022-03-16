@@ -9,12 +9,14 @@ public class Customer extends  Person {
 
     private int custId = 0;
     private String address;
+    private String password;
     private ArrayList<Order> orderHistory;
 
-    public Customer(String fName, String lName, String address) {
+    public Customer(String fName, String lName, String password, String address) {
         super(fName,lName);
         ++this.custId ;
         this.address = address;
+        this.password = password;
         this.orderHistory = new ArrayList<Order> ();
     }
 
@@ -32,6 +34,13 @@ public class Customer extends  Person {
         return orderHistory;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     //create customer, add/delete method in database though
 
@@ -46,7 +55,10 @@ public class Customer extends  Person {
         System.out.println("Enter address: ");
         String address = scanner.nextLine();
 
-        Customer cust = new Customer(fName,lName, address);
+        System.out.println("Enter password:");
+        String password = scanner.nextLine();
+
+        Customer cust = new Customer(fName,lName, password, address);
 
         return cust;
 
