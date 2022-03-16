@@ -43,10 +43,20 @@ public class Database {
             }
 
 
-
         }
 
 
+    }
+
+    public boolean validPassword(String name, String password) {
+
+        for (Customer cust : customers) {
+            if (cust.getfName().equals(name) && cust.getPassword().equals(password)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 
 }
