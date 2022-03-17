@@ -7,6 +7,8 @@ public class Manager extends Staff {
         this.password = password;
     }
 
+
+
     public String getPassword() {
         return password;
     }

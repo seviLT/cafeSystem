@@ -59,4 +59,17 @@ public class Database {
         return false;
     }
 
+    public Customer getCustomer(String name, String password) {
+
+        Customer customer = null;
+
+        for (Customer cust : customers) {
+            if (cust.getfName().equals(name) && cust.getPassword().equals(password)) {
+                 customer = cust;
+            }
+
+        }
+    return customer;
+    }
+
 }
